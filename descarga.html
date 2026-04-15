@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cinta - Descarga</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-dim": "#d73357",
+                        "secondary-fixed-dim": "#00deec",
+                        "surface-container-lowest": "#000000",
+                        "on-error": "#490013",
+                        "primary-fixed": "#ff5eeb",
+                        "secondary-fixed": "#00eefc",
+                        "surface": "#0d0d16",
+                        "primary": "#ff7eea",
+                        "on-secondary-container": "#e3fdff",
+                        "inverse-primary": "#ad00a1",
+                        "on-secondary-fixed": "#003f43",
+                        "tertiary": "#ac89ff",
+                        "on-primary-fixed-variant": "#55004f",
+                        "inverse-surface": "#fcf8ff",
+                        "surface-container-highest": "#252531",
+                        "on-primary-fixed": "#000000",
+                        "on-primary-container": "#450040",
+                        "outline-variant": "#484751",
+                        "surface-bright": "#2b2b38",
+                        "on-tertiary-fixed": "#1f0052",
+                        "secondary-container": "#006970",
+                        "on-tertiary-fixed-variant": "#4700a7",
+                        "tertiary-dim": "#874cff",
+                        "on-primary": "#590053",
+                        "primary-fixed-dim": "#ff2ded",
+                        "on-surface-variant": "#acaab5",
+                        "surface-container-high": "#1f1f2a",
+                        "inverse-on-surface": "#55545e",
+                        "surface-container": "#191923",
+                        "surface-tint": "#ff7eea",
+                        "tertiary-container": "#7000ff",
+                        "surface-dim": "#0d0d16",
+                        "on-error-container": "#ffb2b9",
+                        "primary-dim": "#ff57eb",
+                        "error": "#ff6e84",
+                        "tertiary-fixed-dim": "#b190ff",
+                        "on-surface": "#f2effb",
+                        "outline": "#76747f",
+                        "primary-container": "#ff5eeb",
+                        "surface-container-low": "#13131c",
+                        "surface-variant": "#252531",
+                        "on-secondary-fixed-variant": "#005e64",
+                        "secondary-dim": "#00deec",
+                        "background": "#0d0d16",
+                        "error-container": "#a70138",
+                        "on-tertiary-container": "#f8f1ff",
+                        "tertiary-fixed": "#bda1ff",
+                        "secondary": "#00eefc",
+                        "on-tertiary": "#290067",
+                        "on-secondary": "#005359",
+                        "on-background": "#f2effb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0d0d16;
+            background-image: radial-gradient(circle at 50% 50%, rgba(25, 25, 35, 0.5) 0%, rgba(13, 13, 22, 1) 100%);
+            overflow-x: hidden
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDnkv7ReRSXi8eL9fEPYE3p6QIQBekekqoVW2yXeBQJVtlJQXgUIjSx7Z6fYT0zZ-z-sb_vc1YCjrzkFN2KjED4jxMAin5P0NWA95-NxZXhOl_RF3WROeZZQRyIcMl9toWRbbC0ilI0uZIgujAZPDCiRT-aWZ2xza26P_aINzP1X2ypMEnnQVYB_c6O0YnWkzcXl9lASFPkWc_gNMCKpWzA6tJuhhi1xLOIj_edKGDNJL2O1G36rqZMf2eHxrEeDQpbgYn1Z_vobw);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999
+        }
+
+        .glass-card {
+            background: rgba(31, 31, 42, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px)
+        }
+
+        .neon-glow-primary:hover {
+            box-shadow: 0 10px 30px rgba(255, 126, 234, 0.3)
+        }
+
+        .text-neon-pulse {
+            text-shadow: 0 0 10px rgba(255, 126, 234, 0.5)
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        /* ── Mobile Menu Drawer ── */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(80vw, 320px);
+            background: rgba(13, 13, 22, 0.97);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-left: 1px solid rgba(72, 71, 81, 0.3);
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #menu-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 190;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        #menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #mobile-menu a {
+            color: rgba(242, 239, 251, 0.8);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid rgba(72, 71, 81, 0.2);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        #mobile-menu a:hover {
+            color: #ff7eea;
+        }
+
+        #mobile-menu .menu-close-btn {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: rgba(242, 239, 251, 0.6);
+            cursor: pointer;
+            margin-bottom: 1rem;
+            padding: 0.25rem;
+        }
+
+        #mobile-menu .menu-download-btn {
+            margin-top: auto;
+            background: #ff7eea;
+            color: #590053;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: filter 0.2s, transform 0.15s;
+        }
+
+        #mobile-menu .menu-download-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        #mobile-menu .menu-download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .neon-glow-primary-static {
+            box-shadow: 0 0 20px rgba(255, 126, 234, 0.2)
+        }
+
+        .neon-glow-secondary {
+            box-shadow: 0 0 20px rgba(0, 238, 252, 0.2)
+        }
+    </style>
+</head>
+
+<body class="font-body text-on-background selection:bg-primary selection:text-on-primary-fixed">
+    <div class="grain-overlay"></div>
+    <!-- Mobile Menu Backdrop -->
+    <div id="menu-backdrop" aria-hidden="true"></div>
+    <!-- Mobile Drawer -->
+    <nav id="mobile-menu" aria-label="Menú móvil" role="dialog">
+        <button class="menu-close-btn" id="menu-close-btn" aria-label="Cerrar menú">
+            <span class="material-symbols-outlined" style="font-size:28px">close</span>
+        </button>
+        <a href="index.html">Inicio</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#evolucion">How it Works</a>
+        <a href="descarga.html" style="color: #ff7eea;">Descarga</a>
+        <a href="index.html#soporte">Support</a>
+        <button class="menu-download-btn" onclick="window.location.href='descarga.html'">Descargar Ahora</button>
+    </nav>
+    <!-- Top Nav -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0d0d16]/40 backdrop-blur-xl border-b border-[#484751]/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+        aria-label="Navegación principal">
+        <div
+            class="flex justify-between items-center w-full px-4 md:px-8 py-3 md:py-4 max-w-7xl mx-auto font-['Space_Grotesk'] tracking-tight">
+            <a href="index.html" class="text-xl md:text-2xl font-bold tracking-tighter text-[#f2effb] uppercase hover:text-[#ff7eea] transition-colors">Cinta</a>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html">Inicio</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html#features">Features</a>
+                <a class="text-[#ff7eea] font-bold" href="descarga.html">Descarga</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html#soporte">Support</a>
+            </div>
+            <div class="flex items-center gap-3 md:gap-6">
+                <button
+                    class="hidden md:inline-flex bg-primary-container text-on-primary-fixed px-6 py-2 rounded-lg font-bold tracking-tight hover:scale-105 active:scale-95 transition-all duration-200 neon-glow-primary">Descargar</button>
+                <button id="menu-open-btn" class="md:hidden text-on-background p-1" aria-label="Abrir menú"
+                    aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="material-symbols-outlined" data-icon="menu" style="font-size:28px">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main class="relative pt-20 md:pt-24 min-h-screen">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden py-20 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="z-10 text-center lg:text-left">
+                    <span
+                        class="inline-block px-3 py-1 mb-6 rounded-full bg-secondary-container/30 border border-secondary/20 text-secondary text-xs font-bold tracking-widest uppercase font-headline">Ahora
+                        Disponible Android</span>
+                    <h1
+                        class="text-5xl lg:text-8xl font-black font-headline tracking-tighter leading-none mb-8 text-on-surface">
+                        TRAE LOS <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary">80s</span>
+                        A TU DISPOSITIVO
+                    </h1>
+                    <p
+                        class="text-xl text-on-surface-variant max-w-xl mx-auto lg:mx-0 mb-12 font-light leading-relaxed">
+                        Experimenta el audio como fue concebido: cálido, rico y audazmente auténtico. Descarga Cinta
+                        y transforma tu hardware moderno en un sueño analógico de alta fidelidad.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button
+                            class="group relative px-8 py-4 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold rounded-md flex items-center gap-3 transition-all hover:shadow-[0_0_30px_rgba(255,126,234,0.4)] active:scale-95">
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
+                            <div class="text-left leading-tight">
+                                <p class="text-[10px] uppercase opacity-70">Descargar en</p>
+                                <p class="text-lg">App Store</p>
+                            </div>
+                        </button>
+                        <button
+                            class="group relative px-8 py-4 bg-surface-container-high border-2 border-secondary text-secondary font-bold rounded-md flex items-center gap-3 transition-all hover:bg-secondary hover:text-on-secondary active:scale-95">
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">android</span>
+                            <div class="text-left leading-tight">
+                                <p class="text-[10px] uppercase opacity-70">Disponible en</p>
+                                <p class="text-lg">Google Play</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 blur-[120px] rounded-full"></div>
+                    <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/10 blur-[120px] rounded-full"></div>
+                    <div class="relative z-10 transform lg:rotate-6 hover:rotate-0 transition-transform duration-700">
+                        <div class="glass-card p-4 rounded-[2rem] shadow-2xl">
+                            <img alt="Smartphone Mockup" class="w-72 lg:w-80 rounded-[1.5rem] shadow-inner"
+                                data-alt="3D render of a futuristic smartphone with a music player interface featuring neon magenta and cyan waveforms on a dark background"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyTxEs4OXo6IGUeAiV7RJl6m6feHztr9IECs7ojBZlN0lpRHPiTdgrM7W1VWscTTWmkYv_3ajj2ugkF0P0kfj0hTbtswmh7ZhgetzyGgfBMcNsTMwwF1BroxVzCXner2iBaF65GGwePGCyUSfkY2MZrvI9U0ILulm6fMtGLa_oskgAzB-D81EBVeJG0s4VC3JTOfeNNoB1fnzgquFQ4nBOfNc6jp7N8khEtz7dBQ_DiOY99EYoH8_ck0l_zteFKSZse9gnPkFEnA" />
+                        </div>
+                        <div class="absolute -bottom-10 -right-10 hidden xl:block">
+                            <div class="glass-card p-3 rounded-xl border border-secondary/30">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-secondary">cable</span>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="text-xs text-secondary font-headline uppercase font-bold tracking-widest">
+                                            Escaneando</p>
+                                        <p class="text-sm text-on-surface font-medium">Analog Pulse v2.0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Desktop & Cross-Platform Section -->
+        <section class="py-24 bg-surface-container-low relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+                    <div class="max-w-2xl">
+                        <h2 class="text-3xl lg:text-5xl font-black font-headline uppercase tracking-tight mb-4">Cinta
+                            para Escritorio</h2>
+                        <div class="w-24 h-1 bg-secondary mb-6"></div>
+                        <p class="text-on-surface-variant text-lg">La experiencia completa de estudio. Almacenamiento
+                            ilimitado,
+                            escalado de pérdida a sin pérdida, y herramientas de mezcla integradas.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <a class="flex items-center gap-2 text-on-surface hover:text-primary transition-all font-headline font-bold uppercase tracking-widest text-sm"
+                            href="#">
+                            Windows <span class="material-symbols-outlined">download</span>
+                        </a>
+                        <span class="text-outline">/</span>
+                        <a class="flex items-center gap-2 text-on-surface hover:text-primary transition-all font-headline font-bold uppercase tracking-widest text-sm"
+                            href="#">
+                            macOS <span class="material-symbols-outlined">download</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Features Bento Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Feature 1 -->
+                    <div
+                        class="group relative surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all overflow-hidden h-80 flex flex-col justify-end">
+                        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                            <span class="material-symbols-outlined text-[120px]"
+                                style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+                        </div>
+                        <h3 class="text-2xl font-bold font-headline uppercase mb-3 text-on-surface">Audio de Alta
+                            Fidelidad
+                        </h3>
+                        <p class="text-on-surface-variant leading-relaxed">Masterizado para el oyente nocturno. Audio
+                            sin pérdida de 24 bits que captura cada detalle saturado de tubo.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div
+                        class="group relative bg-surface p-8 rounded-lg border border-outline-variant/10 hover:border-secondary/50 transition-all overflow-hidden h-80 flex flex-col justify-end">
+                        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                            <span class="material-symbols-outlined text-[120px]"
+                                style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold font-headline uppercase mb-3 text-on-surface">Cintas Sin Conexión
+                        </h3>
+                        <p class="text-on-surface-variant leading-relaxed">Descarga tus mixtapes personalizados al
+                            almacenamiento local. Tu música te sigue incluso en los puntos sin señal.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div
+                        class="group relative surface-container-high p-8 rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all overflow-hidden h-80 flex flex-col justify-end">
+                        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                            <span class="material-symbols-outlined text-[120px]"
+                                style="font-variation-settings: 'FILL' 1;">palette</span>
+                        </div>
+                        <h3 class="text-2xl font-bold font-headline uppercase mb-3 text-on-surface">Estética Neón</h3>
+                        <p class="text-on-surface-variant leading-relaxed">Una interfaz totalmente personalizable
+                            inspirada
+                            en los visuales synthwave de medianoche. Controles de intensidad de brillo incluidos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Visual Accent Section -->
+        <section class="py-20 relative px-6 overflow-hidden">
+            <div
+                class="max-w-5xl mx-auto glass-card rounded-2xl overflow-hidden flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 p-12 order-2 md:order-1">
+                    <h2 class="text-4xl font-black font-headline uppercase tracking-tighter mb-6">¿LISTO PARA ESCANEAR?
+                    </h2>
+                    <p class="mb-8 text-on-surface-variant leading-relaxed">Únete a más de 2 millones de oyentes que han
+                        cambiado el estándar digital estéril por la calidez del motor Cinta.</p>
+                    <button
+                        class="w-full sm:w-auto bg-secondary text-on-secondary-fixed font-black font-headline py-4 px-10 rounded-md hover:shadow-[0_0_25px_rgba(0,238,252,0.4)] transition-all uppercase tracking-widest text-sm">Inicia
+                        tu Prueba de 30 Días</button>
+                </div>
+                <div class="w-full md:w-1/2 h-64 md:h-[400px] order-1 md:order-2">
+                    <img alt="Studio Mood" class="w-full h-full object-cover"
+                        data-alt="Interior of a professional music studio at night with glowing magenta LED lights, retro synthesizers, and vintage audio equipment"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd5MTmq0OUK6ofD_EOwfQjPT10fvw-yNH4ZhOPe7o-dY-14Tp1zsvfCRqr89jZPmenfvtORE9r7h4XtdrC81aEM27_1u89YbMlHyEPGE2JOu19WmGLKqrcp0VyjKt03a772wDvcV-CSgFMjnLD9wk68pBAajXh7QhIc4PuwveyxFOnMIxV54ovN2rZGjm52JYXFnVHpFSn23VBbxoUI5zsGqllSVkc5Ych2S18HaosZf80wc5xNmYuoXeoz2NlU_T6jsTfOJmbMQ" />
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-[#13131c] w-full py-10 md:py-12 px-5 md:px-8 border-t border-[#484751]/10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 max-w-7xl mx-auto">
+            <div class="text-xl font-black text-[#ff7eea] uppercase tracking-widest">CINTA</div>
+            <div class="flex flex-wrap justify-center gap-5 md:gap-8 font-['Manrope'] text-sm leading-relaxed">
+                <a class="text-[#f2effb]/50 hover:text-[#ff7eea] transition-colors underline underline-offset-4"
+                    href="#">Terms of Service</a>
+                <a class="text-[#f2effb]/50 hover:text-[#ff7eea] transition-colors underline underline-offset-4"
+                    href="#">Privacy Policy</a>
+                <a class="text-[#f2effb]/50 hover:text-[#ff7eea] transition-colors underline underline-offset-4"
+                    href="#">Contact</a>
+                <a class="text-[#f2effb]/50 hover:text-[#ff7eea] transition-colors underline underline-offset-4"
+                    href="#">Press Kit</a>
+            </div>
+            <div class="text-[#f2effb]/50 text-[10px] tracking-widest text-center">
+                © 2024 CINTA ANALOG SYSTEMS. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+        (function () {
+            const openBtn = document.getElementById('menu-open-btn');
+            const closeBtn = document.getElementById('menu-close-btn');
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+
+            function openMenu() {
+                menu.classList.add('open');
+                backdrop.classList.add('open');
+                openBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                menu.classList.remove('open');
+                backdrop.classList.remove('open');
+                openBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            openBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            backdrop.addEventListener('click', closeMenu);
+
+            // Close when a link inside the drawer is tapped
+            menu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+            });
+        })();
+    </script>
+</body>
+
+</html>
