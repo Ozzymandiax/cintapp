@@ -245,13 +245,16 @@
         aria-label="Navegación principal">
         <div
             class="flex justify-between items-center w-full px-4 md:px-8 py-3 md:py-4 max-w-7xl mx-auto font-['Space_Grotesk'] tracking-tight">
-            <a href="index.html" class="text-xl md:text-2xl font-bold tracking-tighter text-[#f2effb] uppercase hover:text-[#ff7eea] transition-colors">Cinta</a>
+            <a href="index.html"
+                class="text-xl md:text-2xl font-bold tracking-tighter text-[#f2effb] uppercase hover:text-[#ff7eea] transition-colors">Cinta</a>
             <!-- Desktop Links -->
             <div class="hidden md:flex items-center gap-8">
                 <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html">Inicio</a>
-                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html#features">Features</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors"
+                    href="index.html#features">Features</a>
                 <a class="text-[#ff7eea] font-bold" href="descarga.html">Descarga</a>
-                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="index.html#soporte">Support</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors"
+                    href="index.html#soporte">Support</a>
             </div>
             <div class="flex items-center gap-3 md:gap-6">
                 <button
@@ -283,13 +286,13 @@
                         y transforma tu hardware moderno en un sueño analógico de alta fidelidad.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <button
+                        <button onclick="window.location.href='cinta.apk';"
                             class="group relative px-8 py-4 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold rounded-md flex items-center gap-3 transition-all hover:shadow-[0_0_30px_rgba(255,126,234,0.4)] active:scale-95">
                             <span class="material-symbols-outlined"
                                 style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
                             <div class="text-left leading-tight">
-                                <p class="text-[10px] uppercase opacity-70">Descargar en</p>
-                                <p class="text-lg">App Store</p>
+                                <p class="text-[10px] uppercase opacity-70">Descargar</p>
+                                <p class="text-lg">Apk</p>
                             </div>
                         </button>
                         <button
@@ -298,7 +301,7 @@
                                 style="font-variation-settings: 'FILL' 1;">android</span>
                             <div class="text-left leading-tight">
                                 <p class="text-[10px] uppercase opacity-70">Disponible en</p>
-                                <p class="text-lg">Google Play</p>
+                                <p class="text-lg">Aptoide</p>
                             </div>
                         </button>
                     </div>
@@ -441,40 +444,40 @@
 
     <!-- Mobile Menu JavaScript -->
     <script>
-        (function () {
-            const openBtn = document.getElementById('menu-open-btn');
-            const closeBtn = document.getElementById('menu-close-btn');
-            const menu = document.getElementById('mobile-menu');
-            const backdrop = document.getElementById('menu-backdrop');
+            (function () {
+                const openBtn = document.getElementById('menu-open-btn');
+                const closeBtn = document.getElementById('menu-close-btn');
+                const menu = document.getElementById('mobile-menu');
+                const backdrop = document.getElementById('menu-backdrop');
 
-            function openMenu() {
-                menu.classList.add('open');
-                backdrop.classList.add('open');
-                openBtn.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden';
-            }
+                function openMenu() {
+                    menu.classList.add('open');
+                    backdrop.classList.add('open');
+                    openBtn.setAttribute('aria-expanded', 'true');
+                    document.body.style.overflow = 'hidden';
+                }
 
-            function closeMenu() {
-                menu.classList.remove('open');
-                backdrop.classList.remove('open');
-                openBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            }
+                function closeMenu() {
+                    menu.classList.remove('open');
+                    backdrop.classList.remove('open');
+                    openBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                }
 
-            openBtn.addEventListener('click', openMenu);
-            closeBtn.addEventListener('click', closeMenu);
-            backdrop.addEventListener('click', closeMenu);
+                openBtn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                backdrop.addEventListener('click', closeMenu);
 
-            // Close when a link inside the drawer is tapped
-            menu.querySelectorAll('a').forEach(function (link) {
-                link.addEventListener('click', closeMenu);
-            });
+                // Close when a link inside the drawer is tapped
+                menu.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', closeMenu);
+                });
 
-            // Close on Escape key
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
-            });
-        })();
+                // Close on Escape key
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+                });
+            })();
     </script>
 </body>
 
