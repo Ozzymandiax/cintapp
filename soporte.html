@@ -253,7 +253,8 @@
                 <div class="relative z-10">
                     <h2 class="font-headline text-3xl font-black uppercase mb-8 tracking-tighter">Contacto Directo
                     </h2>
-                    <form class="space-y-6" id="contact-form">
+                    <form class="space-y-6" id="contact-form" name="contacto" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contacto" />
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label
@@ -460,29 +461,24 @@
             submitBtn.innerText = 'Enviando...';
             submitBtn.disabled = true;
 
-            const formData = {
-                nombre: form.nombre.value,
-                email: form.email.value,
-                asunto: form.asunto.value,
-                mensaje: form.mensaje.value
-            };
+            const formData = new FormData(form);
 
             try {
-                const response = await fetch('/api/contacto', {
+                const response = await fetch('/', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
                 });
 
                 if (response.ok) {
-                    alert('¡Mensaje enviado con éxito! Se ha registrado en el sistema.');
+                    alert('¡Mensaje enviado con éxito! Podrás ver el registro en tu panel de Netlify.');
                     form.reset();
                 } else {
-                    throw new Error('Error en el servidor');
+                    throw new Error('Error al enviar el formulario a Netlify');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Hubo un error al enviar el mensaje. Asegúrate de que el servidor esté corriendo.');
+                alert('Hubo un error al enviar el mensaje. Asegúrate de estar en el dominio de Netlify.');
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
