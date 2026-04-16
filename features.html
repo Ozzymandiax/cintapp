@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cinta | Manual de Usuario</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#2b2b38",
+                        "on-secondary": "#005359",
+                        "on-primary-fixed": "#000000",
+                        "background": "#0d0d16",
+                        "on-secondary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#4700a7",
+                        "on-primary-fixed-variant": "#55004f",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-fixed": "#bda1ff",
+                        "error-container": "#a70138",
+                        "surface": "#0d0d16",
+                        "secondary-fixed": "#00eefc",
+                        "error": "#ff6e84",
+                        "secondary-fixed-dim": "#00deec",
+                        "on-tertiary-fixed": "#1f0052",
+                        "on-surface": "#f2effb",
+                        "surface-container": "#191923",
+                        "tertiary": "#ac89ff",
+                        "on-tertiary": "#290067",
+                        "on-primary-container": "#450040",
+                        "primary": "#ff7eea",
+                        "tertiary-fixed-dim": "#b190ff",
+                        "inverse-surface": "#fcf8ff",
+                        "on-surface-variant": "#acaab5",
+                        "error-dim": "#d73357",
+                        "outline": "#76747f",
+                        "on-primary": "#590053",
+                        "on-error-container": "#ffb2b9",
+                        "tertiary-dim": "#874cff",
+                        "on-tertiary-container": "#f8f1ff",
+                        "inverse-primary": "#ad00a1",
+                        "outline-variant": "#484751",
+                        "surface-container-high": "#1f1f2a",
+                        "secondary": "#00eefc",
+                        "surface-container-highest": "#252531",
+                        "on-secondary-fixed": "#003f43",
+                        "on-background": "#f2effb",
+                        "tertiary-container": "#7000ff",
+                        "primary-fixed-dim": "#ff2ded",
+                        "surface-variant": "#252531",
+                        "secondary-dim": "#00deec",
+                        "primary-dim": "#ff57eb",
+                        "surface-container-low": "#13131c",
+                        "on-error": "#490013",
+                        "surface-dim": "#0d0d16",
+                        "secondary-container": "#006970",
+                        "surface-tint": "#ff7eea",
+                        "primary-fixed": "#ff5eeb",
+                        "primary-container": "#ff5eeb",
+                        "on-secondary-container": "#e3fdff",
+                        "inverse-on-surface": "#55545e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0d0d16;
+            color: #f2effb;
+            font-family: 'Manrope', sans-serif;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .glass-panel {
+            background: rgba(31, 31, 42, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .neon-glow-primary:hover {
+            box-shadow: 0px 10px 30px rgba(255, 126, 234, 0.3);
+        }
+
+        .neon-glow-secondary:hover {
+            box-shadow: 0px 10px 30px rgba(0, 238, 252, 0.2);
+        }
+
+        .tape-spine {
+            border-top: 2px solid #00eefc;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-primary selection:text-on-primary">
+    <!-- Mobile Menu Backdrop -->
+    <div id="menu-backdrop"
+        class="fixed inset-0 bg-black/60 z-[190] opacity-0 pointer-events-none transition-opacity duration-300"
+        aria-hidden="true"></div>
+    <!-- Mobile Drawer -->
+    <nav id="mobile-menu"
+        class="fixed top-0 right-0 h-screen w-[min(80vw,320px)] bg-[#0d0d16]/95 backdrop-blur-2xl border-l border-[#484751]/30 z-[200] translate-x-full transition-transform duration-350 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col p-6 gap-2"
+        aria-label="Menú móvil" role="dialog">
+        <button class="self-end p-2 text-on-surface/60 hover:text-primary transition-colors mb-4" id="menu-close-btn"
+            aria-label="Cerrar menú">
+            <span class="material-symbols-outlined" style="font-size:28px">close</span>
+        </button>
+        <a class="text-xl font-bold font-headline text-on-surface/80 hover:text-primary py-3 border-b border-outline-variant/20 transition-colors"
+            href="index.html">Inicio</a>
+        <a class="text-xl font-bold font-headline text-on-surface/80 hover:text-primary py-3 border-b border-outline-variant/20 transition-colors"
+            href="#hero">Manual</a>
+        <a class="text-xl font-bold font-headline text-on-surface/80 hover:text-primary py-3 border-b border-outline-variant/20 transition-colors"
+            href="descarga.html">Descarga</a>
+        <a class="text-xl font-bold font-headline text-on-surface/80 hover:text-primary py-3 border-b border-outline-variant/20 transition-colors"
+            href="#faq">FAQ</a>
+        <a href="descarga.html"
+            class="mt-auto bg-primary text-on-primary-fixed text-center py-4 rounded font-black font-headline uppercase tracking-widest text-sm hover:scale-[1.02] active:scale-95 transition-all">Descargar
+            Ahora</a>
+    </nav>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0d0d16]/40 backdrop-blur-xl border-b border-[#484751]/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+        aria-label="Navegación principal">
+        <div
+            class="flex justify-between items-center w-full px-4 md:px-8 py-3 md:py-4 max-w-7xl mx-auto font-['Space_Grotesk'] tracking-tight">
+            <a href="index.html"
+                class="text-xl md:text-2xl font-bold tracking-tighter text-[#f2effb] uppercase hover:text-[#ff7eea] transition-colors">Cinta</a>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-[#f2effb]/ 70 hover:text-[#ff7eea] transition-colors" href="index.html">Inicio</a>
+                <a class="text-[#ff7eea] font-bold" href="features.html">Features</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="descarga.html">Descarga</a>
+                <a class="text-[#f2effb]/70 hover:text-[#ff7eea] transition-colors" href="soporte.html">Soporte</a>
+            </div>
+            <div class="flex items-center gap-3 md:gap-6">
+                <a href="descarga.html"
+                    class="hidden md:inline-flex bg-primary-container text-on-primary-fixed px-6 py-2 rounded-lg font-bold tracking-tight hover:scale-105 active:scale-95 transition-all duration-200 neon-glow-primary">Descargar</a>
+                <button id="menu-open-btn" class="md:hidden text-on-background p-1" aria-label="Abrir menú"
+                    aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="material-symbols-outlined" data-icon="menu" style="font-size:28px">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Content Wrapper for Sidebar + Main -->
+    <div class="flex min-h-screen">
+        <!-- SideNavBar -->
+        <aside
+            class="hidden lg:flex flex-col h-screen sticky top-0 w-64 bg-[#0d0d16] border-r border-[#484751]/20 overflow-y-auto">
+            <div class="p-6 pt-24 space-y-8">
+                <div class="space-y-1">
+                    <h3 class="font-headline font-black text-primary text-xl">Cinta</h3>
+                    <p class="text-on-surface-variant text-xs uppercase tracking-widest">The Analog Future</p>
+                </div>
+                <nav class="space-y-2">
+                    <a class="flex items-center gap-3 bg-[#1f1f2a] text-[#ff7eea] rounded-lg px-4 py-3 border-l-4 border-[#ff7eea] transition-all duration-200"
+                        href="#hero">
+                        <span class="material-symbols-outlined">play_circle</span>
+                        <span class="font-body text-base">Introducción</span>
+                    </a>
+                    <a class="flex items-center gap-3 text-[#f2effb]/60 px-4 py-3 hover:text-[#00eefc] hover:bg-[#13131c] transition-all duration-200"
+                        href="#reproductor">
+                        <span class="material-symbols-outlined">library_music</span>
+                        <span class="font-body text-base">Reproductor</span>
+                    </a>
+                    <a class="flex items-center gap-3 text-[#f2effb]/60 px-4 py-3 hover:text-[#00eefc] hover:bg-[#13131c] transition-all duration-200"
+                        href="#biblioteca">
+                        <span class="material-symbols-outlined">download</span>
+                        <span class="font-body text-base">Biblioteca</span>
+                    </a>
+                    <a class="flex items-center gap-3 text-[#f2effb]/60 px-4 py-3 hover:text-[#00eefc] hover:bg-[#13131c] transition-all duration-200"
+                        href="#busqueda">
+                        <span class="material-symbols-outlined">subtitles</span>
+                        <span class="font-body text-base">Búsqueda</span>
+                    </a>
+                    <a class="flex items-center gap-3 text-[#f2effb]/60 px-4 py-3 hover:text-[#00eefc] hover:bg-[#13131c] transition-all duration-200"
+                        href="#avanzadas">
+                        <span class="material-symbols-outlined">bedtime</span>
+                        <span class="font-body text-base">Avanzado</span>
+                    </a>
+                    <a class="flex items-center gap-3 text-[#f2effb]/60 px-4 py-3 hover:text-[#00eefc] hover:bg-[#13131c] transition-all duration-200"
+                        href="#faq">
+                        <span class="material-symbols-outlined">palette</span>
+                        <span class="font-body text-base">FAQ</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        <!-- Main Content Canvas -->
+        <main class="flex-1 min-h-screen">
+            <!-- Hero Section -->
+            <section class="relative min-h-[819px] flex flex-col justify-center items-center px-6 overflow-hidden pt-20"
+                id="hero">
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+                    <img alt="Synth Background" class="w-full h-full object-cover opacity-30"
+                        data-alt="vibrant abstract background with neon pink and blue light streaks on dark night sky background"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxGjYFjIZwdNrfh8aA3z-gmBsRNQIZthAYcxo6gSQH8W0xLhsGQO0R1zGCATXGIkUmP6qoJSDufJaW0ZbGxMqX6wLVCP-sSCXuQY7pFVglotycBgX-1ChXqFnWk-93OCx94nEDxftPYBEsvQDJrXGy3xP1SYfOtbSKAWSNzWzwY1HEdadtFVO21tCWXaDQ9rmmG7oCbmsGLBaTD_rbcAXklGyAF1VI9qm0RmAHmnHE1Ov10XVhRtQ4BYfuTc0VtXkE2JlNgtbFbA" />
+                </div>
+                <div class="relative z-10 text-center max-w-4xl">
+                    <span
+                        class="inline-block px-4 py-1 mb-6 border border-secondary text-secondary text-xs font-headline uppercase tracking-[0.3em] rounded-full">Manual
+                        de Usuario</span>
+                    <h1
+                        class="text-6xl md:text-8xl font-headline font-black italic tracking-tighter text-on-surface mb-6 uppercase leading-none">
+                        Cómo Funciona <span class="text-primary">Cinta</span>
+                    </h1>
+                    <p class="text-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                        Bienvenido al futuro de la nostalgia. Cinta combina la calidez táctil de los 80 con la potencia
+                        digital del mañana. Aprende a dominar tu estación de audio personal.
+                    </p>
+                    <div class="mt-12 flex flex-wrap justify-center gap-6">
+                        <a class="bg-gradient-to-r from-primary to-primary-dim px-8 py-4 rounded-md text-on-primary-fixed font-bold uppercase tracking-widest neon-glow-primary transition-all duration-300"
+                            href="#reproductor">Empezar Guía</a>
+                        <button
+                            class="border border-secondary px-8 py-4 rounded-md text-secondary font-bold uppercase tracking-widest hover:bg-secondary/10 transition-all duration-300">Descargar
+                            App</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 1: EL REPRODUCTOR -->
+            <section class="py-24 px-6 md:px-12 bg-surface-container-low" id="reproductor">
+                <div class="max-w-7xl mx-auto">
+                    <div class="tape-spine mb-12 pt-4">
+                        <h2 class="text-4xl font-headline font-black text-on-surface uppercase tracking-tight">🎧 EL
+                            REPRODUCTOR</h2>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-8">
+                            <p class="text-on-surface-variant text-lg leading-relaxed">
+                                El corazón de Cinta es nuestro motor de reproducción híbrido. Disfruta de una
+                                experiencia visual única mientras navegas por tus pistas favoritas.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="glass-panel p-6 rounded-xl border border-outline-variant/10">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <span class="material-symbols-outlined text-secondary">play_arrow</span>
+                                        <h4 class="font-headline font-bold text-on-surface">CONTROLES CORE</h4>
+                                    </div>
+                                    <p class="text-sm text-on-surface-variant">Play/Pause, Next y Previous diseñados
+                                        para una respuesta inmediata. El diseño asimétrico permite un control fácil con
+                                        una sola mano.</p>
+                                </div>
+                                <div class="glass-panel p-6 rounded-xl border border-outline-variant/10">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <span class="material-symbols-outlined text-secondary">shuffle</span>
+                                        <h4 class="font-headline font-bold text-on-surface">ORDEN INTELIGENTE</h4>
+                                    </div>
+                                    <p class="text-sm text-on-surface-variant">Modos Shuffle y Repeat infinitos. La cola
+                                        de reproducción inteligente predice tus gustos basándose en el pulso de la
+                                        cinta.</p>
+                                </div>
+                            </div>
+                            <div class="bg-primary/5 border-l-4 border-primary p-6 rounded-r-xl">
+                                <div class="flex gap-4">
+                                    <span class="material-symbols-outlined text-primary"
+                                        style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                                    <div>
+                                        <p class="font-bold text-primary mb-1 uppercase tracking-wider text-sm">PRO TIP
+                                        </p>
+                                        <p class="text-on-surface-variant text-sm">Mantén presionado el botón <span
+                                                class="text-on-surface">Previous</span> para rebobinar suavemente, o haz
+                                            doble click para saltar al inicio del álbum actual.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group">
+                            <div
+                                class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                            </div>
+                            <div class="relative bg-surface-container-high rounded-2xl p-4 overflow-hidden">
+                                <img alt="Cassette Tape Animation" class="w-full rounded-lg shadow-2xl"
+                                    data-alt="close-up of a vintage retro cassette tape with neon glowing highlights inside a modern music player interface"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp3RB2EPeV8RDZJqvi60KKJIXBqiLpje8FtqcdvH4ZBLwTNuRDglmqTRA4DvJX9zGifede3YKC3dpFnaQpHmggd7wozNktM48Y-Z7cjJKcKdZhs9qgV8Ko7DDOfLGwq-x-8YCZ562yB7jwdlG4t-EICNTFiH2zyYmwxGmDU1dh5sut_OzVO_VKXKM5WOP8DS-b_eVedqcZHGDhjBgn3oLfUvlwJx2gXd2AyJYklBzTNWOfESlnnsyw1j_2LtmyPaqBjpzr1wqDdA" />
+                                <div class="absolute bottom-10 left-10 right-10 flex flex-col gap-2">
+                                    <div class="h-1 bg-on-surface-variant/20 rounded-full overflow-hidden">
+                                        <div class="h-full bg-secondary w-2/3 shadow-[0_0_10px_#00eefc]"></div>
+                                    </div>
+                                    <div
+                                        class="flex justify-between text-[10px] font-headline text-secondary tracking-widest uppercase">
+                                        <span>02:45</span>
+                                        <span>04:20</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 2: BIBLIOTECA MUSICAL -->
+            <section class="py-24 px-6 md:px-12" id="biblioteca">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-end mb-12 border-b border-outline-variant/20 pb-4">
+                        <div class="tape-spine pt-4">
+                            <h2 class="text-4xl font-headline font-black text-on-surface uppercase tracking-tight">📚
+                                BIBLIOTECA MUSICAL</h2>
+                        </div>
+                        <span class="text-secondary font-headline text-sm tracking-widest">ARCHIVE_V3.0</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-surface-container p-8 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-all group">
+                            <span
+                                class="material-symbols-outlined text-4xl text-primary mb-6 group-hover:scale-110 transition-transform">folder_open</span>
+                            <h3 class="text-xl font-headline font-bold text-on-surface mb-4">ORGANIZACIÓN TOTAL</h3>
+                            <p class="text-on-surface-variant leading-relaxed text-sm">Gestiona tus canciones
+                                descargadas con facilidad. Ordena por artista, álbum o fecha de adición usando el filtro
+                                cinético.</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-surface-container p-8 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-all group">
+                            <span
+                                class="material-symbols-outlined text-4xl text-secondary mb-6 group-hover:scale-110 transition-transform">playlist_add_check</span>
+                            <h3 class="text-xl font-headline font-bold text-on-surface mb-4">MULTI-SELECCIÓN</h3>
+                            <p class="text-on-surface-variant leading-relaxed text-sm">Mantén presionada cualquier
+                                canción para entrar en el modo ráfaga. Selecciona múltiples pistas para moverlas,
+                                borrarlas o añadirlas a una playlist.</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div
+                            class="bg-surface-container p-8 rounded-xl border border-outline-variant/10 hover:bg-surface-container-high transition-all group">
+                            <span
+                                class="material-symbols-outlined text-4xl text-tertiary mb-6 group-hover:scale-110 transition-transform">auto_awesome</span>
+                            <h3 class="text-xl font-headline font-bold text-on-surface mb-4">PLAYLISTS DINÁMICAS</h3>
+                            <p class="text-on-surface-variant leading-relaxed text-sm">Crea listas de reproducción que
+                                se actualizan solas basadas en tu estado de ánimo o género predominante del mes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 3: BÚSQUEDA Y DESCARGAS (Bento Grid) -->
+            <section class="py-24 px-6 md:px-12 bg-surface-container-low" id="busqueda">
+                <div class="max-w-7xl mx-auto">
+                    <div class="tape-spine mb-12 pt-4">
+                        <h2 class="text-4xl font-headline font-black text-on-surface uppercase tracking-tight">🔍
+                            BÚSQUEDA Y DESCARGAS</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-auto md:h-[600px]">
+                        <div
+                            class="md:col-span-2 md:row-span-2 bg-surface-container rounded-xl overflow-hidden relative group p-8 border border-outline-variant/10">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 opacity-60">
+                            </div>
+                            <img alt="Concert Search"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                data-alt="vibrant concert crowd in silhouette with purple and pink stage lights and light beams"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS237ixyZe-0Yqs_FlNvKqy-PNOuitI_vjCyHkDBEaltvnhaGZXTAmNrcN77UMg8fmFZ5q5GkulfP5MOW_zf75SevbCeGWZuMbg0zjolaKn5HbiFLQVsUYHJvgnQoZ95cVjLh251Dol1JQW5SsfhFGJY9YM530J8EtqHvttyWoPfEsJ0XSlMWl6rD2ptbpWEy9YPItCkpIU_3E4P0JQPHrtVJvaPol1aCk0iULHZvvIoian_GfAcL82rFQq0vz8c5Wqdpc5Hr-TA" />
+                            <div class="relative z-20 flex flex-col h-full justify-end">
+                                <h3 class="text-3xl font-headline font-black text-white mb-2 italic">YouTube Integration
+                                </h3>
+                                <p class="text-on-surface-variant max-w-xs">Accede a todo el catálogo mundial. Streaming
+                                    directo o descarga instantánea en formato Hi-Fi.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="md:col-span-2 bg-[#1f1f2a]/60 backdrop-blur-xl border border-secondary/20 rounded-xl p-8 flex items-center gap-6">
+                            <span class="material-symbols-outlined text-6xl text-secondary">bolt</span>
+                            <div>
+                                <h4 class="font-headline font-bold text-xl text-secondary mb-1">DESCARGAS ULTRA-RÁPIDAS
+                                </h4>
+                                <p class="text-sm text-on-surface-variant">Nuestro protocolo de descarga paralelo
+                                    fragmenta los archivos para ofrecer velocidades hasta 5x superiores a la
+                                    competencia.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-surface-container-high rounded-xl p-6 border border-outline-variant/10 flex flex-col justify-center">
+                            <span class="material-symbols-outlined text-tertiary mb-3">radio</span>
+                            <h4 class="font-headline font-bold text-on-surface">MODO RADIO</h4>
+                            <p class="text-xs text-on-surface-variant">Genera una estación infinita basada en cualquier
+                                canción o artista de YouTube.</p>
+                        </div>
+                        <div
+                            class="bg-surface-container-high rounded-xl p-6 border border-outline-variant/10 flex flex-col justify-center">
+                            <span class="material-symbols-outlined text-primary mb-3">import_export</span>
+                            <h4 class="font-headline font-bold text-on-surface">IMPORTACIÓN</h4>
+                            <p class="text-xs text-on-surface-variant">Pega el link de una playlist de YouTube y deja
+                                que Cinta haga el resto.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 4: LETRAS SINCRONIZADAS -->
+            <section class="py-24 px-6 md:px-12" id="letras">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+                    <div class="flex-1 order-2 md:order-1">
+                        <div class="glass-panel p-8 rounded-2xl border border-primary/20 space-y-6">
+                            <h2 class="text-5xl font-headline font-black text-primary uppercase italic">🎤 LETRAS
+                                SINCRONIZADAS</h2>
+                            <p class="text-on-surface-variant text-lg">No solo escuches, siente cada palabra. Nuestras
+                                letras aparecen en tiempo real con una tipografía dinámica que pulsa al ritmo del bajo.
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                                    <span class="text-on-surface">Auto-scroll inteligente</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                                    <span class="text-on-surface">Traducciones en tiempo real</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                                    <span class="text-on-surface">Modo Karaoke con reducción de voz</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex-1 order-1 md:order-2 grid grid-cols-2 gap-4">
+                        <div class="bg-surface-container rounded-lg p-4 h-64 flex items-end">
+                            <p class="text-3xl font-headline font-bold opacity-30">Vaporwave dreams...</p>
+                        </div>
+                        <div
+                            class="bg-surface-container-high rounded-lg p-4 h-64 flex items-center border-l-4 border-secondary">
+                            <p class="text-3xl font-headline font-bold text-on-surface">Neon lights are burning bright
+                            </p>
+                        </div>
+                        <div class="col-span-2 bg-primary/10 rounded-lg p-4 h-24 flex items-center justify-center">
+                            <p class="text-xl font-headline text-primary italic">In the heart of the digital night</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 5: FUNCIONES AVANZADAS -->
+            <section class="py-24 px-6 md:px-12 bg-surface-container-low overflow-hidden relative" id="avanzadas">
+                <div class="max-w-7xl mx-auto relative z-10">
+                    <div class="tape-spine mb-12 pt-4">
+                        <h2 class="text-4xl font-headline font-black text-on-surface uppercase tracking-tight">⚙️
+                            FUNCIONES AVANZADAS</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- Sleep Timer -->
+                        <div class="flex gap-6">
+                            <div
+                                class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center border border-outline-variant/30 flex-shrink-0">
+                                <span class="material-symbols-outlined text-primary text-3xl">bedtime</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-headline font-bold text-on-surface mb-2">SLEEP TIMER</h3>
+                                <p class="text-on-surface-variant">Configura el apagado automático para esas sesiones
+                                    nocturnas. El volumen descenderá gradualmente hasta silenciarse por completo,
+                                    protegiendo tus oídos y tu batería.</p>
+                            </div>
+                        </div>
+                        <!-- Dynamic Palette -->
+                        <div class="flex gap-6">
+                            <div
+                                class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center border border-outline-variant/30 flex-shrink-0">
+                                <span class="material-symbols-outlined text-secondary text-3xl">palette</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-headline font-bold text-on-surface mb-2">PALETTE DYNAMIC</h3>
+                                <p class="text-on-surface-variant">Cinta extrae los colores dominantes del arte de
+                                    portada y transforma toda la interfaz. Cada álbum tiene su propia personalidad
+                                    visual única.</p>
+                            </div>
+                        </div>
+                        <!-- System Controls -->
+                        <div class="flex gap-6">
+                            <div
+                                class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center border border-outline-variant/30 flex-shrink-0">
+                                <span
+                                    class="material-symbols-outlined text-tertiary text-3xl">notifications_active</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-headline font-bold text-on-surface mb-2">NATIVE CONTROLS</h3>
+                                <p class="text-on-surface-variant">Control total desde la pantalla de bloqueo y el panel
+                                    de notificaciones. Widgets rediseñados que respetan el lenguaje visual de tu
+                                    dispositivo.</p>
+                            </div>
+                        </div>
+                        <!-- Audio Engine -->
+                        <div class="flex gap-6">
+                            <div
+                                class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center border border-outline-variant/30 flex-shrink-0">
+                                <span class="material-symbols-outlined text-on-surface text-3xl">equalizer</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-headline font-bold text-on-surface mb-2">DSP ENGINE</h3>
+                                <p class="text-on-surface-variant">Procesamiento de señal digital para emular la
+                                    distorsión armónica de las cintas de cromo de alta fidelidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section 6: FAQ -->
+            <section class="py-24 px-6 md:px-12" id="faq">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl font-headline font-black text-on-surface uppercase mb-4 italic">PREGUNTAS
+                            FRECUENTES</h2>
+                        <p class="text-on-surface-variant uppercase tracking-widest text-sm">Resuelve tus dudas en el
+                            nodo central</p>
+                    </div>
+                    <div class="space-y-6">
+                        <details
+                            class="group bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden"
+                            open="">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer hover:bg-surface-container-high transition-colors">
+                                <span class="text-lg font-headline font-bold text-secondary">¿Dónde se guardan mis
+                                    canciones descargadas?</span>
+                                <span
+                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div
+                                class="p-6 pt-0 text-on-surface-variant leading-relaxed border-t border-outline-variant/5">
+                                Por defecto, Cinta utiliza una carpeta encriptada en el almacenamiento interno para
+                                asegurar la máxima velocidad. Puedes cambiar esta ruta a tu tarjeta SD desde la sección
+                                <span class="text-primary font-bold">Settings &gt; Storage &gt; Data Path</span>.
+                            </div>
+                        </details>
+                        <details
+                            class="group bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer hover:bg-surface-container-high transition-colors">
+                                <span class="text-lg font-headline font-bold text-secondary">¿Es necesario tener
+                                    internet siempre?</span>
+                                <span
+                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div
+                                class="p-6 pt-0 text-on-surface-variant leading-relaxed border-t border-outline-variant/5">
+                                Solo para buscar y descargar. Una vez la canción está en tu Biblioteca, Cinta funciona
+                                de manera 100% offline. No rastreamos tus datos ni requerimos login constante para
+                                escuchar lo que ya es tuyo.
+                            </div>
+                        </details>
+                        <details
+                            class="group bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden">
+                            <summary
+                                class="flex justify-between items-center p-6 cursor-pointer hover:bg-surface-container-high transition-colors">
+                                <span class="text-lg font-headline font-bold text-secondary">¿Cómo optimizo el uso de
+                                    batería?</span>
+                                <span
+                                    class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                            </summary>
+                            <div
+                                class="p-6 pt-0 text-on-surface-variant leading-relaxed border-t border-outline-variant/5">
+                                Desactiva las "Animaciones de Cinta" en ajustes si necesitas ahorrar energía. Cinta está
+                                optimizado para funcionar en segundo plano con un consumo mínimo, incluso en
+                                dispositivos antiguos.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer class="w-full py-12 border-t border-[#484751]/10 bg-[#0d0d16] flex flex-col items-center gap-6 mt-auto">
+        <div class="flex gap-8">
+            <a class="text-[#f2effb]/40 hover:text-[#ff7eea] transition-colors font-['Manrope'] text-xs uppercase tracking-widest"
+                href="#">FAQ</a>
+            <a class="text-[#f2effb]/40 hover:text-[#ff7eea] transition-colors font-['Manrope'] text-xs uppercase tracking-widest"
+                href="#">Support</a>
+            <a class="text-[#f2effb]/40 hover:text-[#ff7eea] transition-colors font-['Manrope'] text-xs uppercase tracking-widest"
+                href="#">Privacy Policy</a>
+            <a class="text-[#f2effb]/40 hover:text-[#ff7eea] transition-colors font-['Manrope'] text-xs uppercase tracking-widest"
+                href="#">Terms of Service</a>
+        </div>
+        <p class="font-['Manrope'] text-xs uppercase tracking-widest text-[#f2effb]/40">© 1984-2024 CINTA AUDIO LABS.
+            ALL RIGHTS RESERVED.</p>
+        <div class="flex gap-4 mt-4">
+            <span class="w-8 h-[1px] bg-primary"></span>
+            <span class="w-8 h-[1px] bg-secondary"></span>
+            <span class="w-8 h-[1px] bg-tertiary"></span>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu JavaScript -->
+    <script>
+            (function () {
+                const openBtn = document.getElementById('menu-open-btn');
+                const closeBtn = document.getElementById('menu-close-btn');
+                const menu = document.getElementById('mobile-menu');
+                const backdrop = document.getElementById('menu-backdrop');
+
+                function openMenu() {
+                    menu.style.transform = 'translateX(0)';
+                    backdrop.style.opacity = '1';
+                    backdrop.style.pointerEvents = 'auto';
+                    openBtn.setAttribute('aria-expanded', 'true');
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeMenu() {
+                    menu.style.transform = 'translateX(100%)';
+                    backdrop.style.opacity = '0';
+                    backdrop.style.pointerEvents = 'none';
+                    openBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                }
+
+                openBtn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                backdrop.addEventListener('click', closeMenu);
+
+                // Close when a link inside the drawer is tapped
+                menu.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close on Escape key
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && menu.style.transform === 'translateX(0px)') closeMenu();
+                });
+            })();
+    </script>
+</body>
+
+</html>
